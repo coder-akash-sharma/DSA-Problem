@@ -18,7 +18,7 @@ class Solution {
 } 
         
              // update the mid index
-              mid = (start+end) / 2;
+              mid = (start+(end - start)/2);
         }
         return -1;
         
