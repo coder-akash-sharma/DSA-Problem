@@ -1,23 +1,31 @@
 class Solution {
+
     public int[] singleNumber(int[] nums) {
 
-        HashMap<Integer, Integer> map = new HashMap<>();
+        int xor = 0;
 
-        // Count frequency
+        // Step 1: XOR all numbers
         for (int num : nums) {
-            map.put(num, map.getOrDefault(num, 0) + 1);
+            xor = xor ^ num;
         }
 
-        int[] ans = new int[2];
-        int index = 0;
+        // Step 2: Find a bit where two unique numbers differ
+        int diff = xor & (-xor);
 
-        // Find numbers appearing once
+        int a = 0;
+        int b = 0;
+
+        // Step 3: Divide numbers into two groups
         for (int num : nums) {
-            if (map.get(num) == 1) {
-                ans[index++] = num;
+
+            if ((num & diff) == 0) {
+                a = a ^ num;
+            } 
+            else {
+                b = b ^ num;
             }
         }
 
-        return ans;
+        return new int[]{a, b};
     }
 }
